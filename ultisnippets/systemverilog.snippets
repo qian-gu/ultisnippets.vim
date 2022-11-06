@@ -1,0 +1,145 @@
+priority -50
+
+extends verilog
+
+# We want to overwrite everything in parent ft.
+priority -49
+
+#######################
+# combinational logic #
+#######################
+
+snippet comb "Infer combinational from always_comb" b
+always_comb begin
+	${1:${VISUAL}}
+end
+$0
+endsnippet
+
+snippet latch "Infer latch from always" b
+always_latch begin
+	${1:${VISUAL}}
+end
+$0
+endsnippet
+
+#############
+# Flip-Flop #
+#############
+# see https://github.com/pulp-platform/common_cells/include/common_cells/register.svh
+#
+# Abridged Summary of available FF macros:
+#
+# `FFSR:    synchronous active-high reset
+# `FFAR:    asynchronous active-high reset
+# `FFNR:    without reset
+#
+# `FFLSR:   load-enable and synchronous active-high reset
+# `FFLAR:   load-enable and asynchronous active-high reset
+# `FFLNR:   load-enable without reset
+
+# Flip-Flop with asynchronous reset
+snippet ffar "Flip-Flop with asynchronous reset" b
+always_ff @(posedge ${3:clk} or negedge ${4:rst_n}) begin
+	if (!$4) begin
+		$1 <= ${5:'0};
+	end else begin
+		${1:${VISUAL}} <= ${2};
+	end
+end
+$0
+endsnippet
+
+# Flip-Flop with synchronous reset
+snippet ffsr "Flip-Flop with asynchronous active-high reset" b
+always_ff @(posedge ${3:clk}) begin
+	if (!${4:rst_n}) begin
+		$1 <= ${5:'0};
+	end else begin
+		${1:${VISUAL}} <= ${2};
+	end
+end
+$0
+endsnippet
+
+# Always-enable Flip-Flop without reset
+snippet ffnr "Always-enable Flip-Flop without reset" b
+always_ff @(posedge ${3:clk}) begin
+		${1:${VISUAL}} <= ${2};
+end
+$0
+endsnippet
+
+# Flip-Flop with load-enable and asynchronous active-low reset
+snippet fflar "Flip-Flop with load-enable and asynchronous reset" b
+always_ff @(posedge ${4:clk} or negedge ${5:rst_n}) begin
+	if (!$5) begin
+		$2 <= ${6:'0};
+	end else if (${1}) begin
+		${2:${VISUAL}} <= ${3};
+	end
+end
+$0
+endsnippet
+
+# Flip-Flop with load-enable and synchronous active-low reset
+snippet fflsr "Flip-Flop with load-enable and synchronous reset" b
+always_ff @(posedge ${4:clk}) begin
+	if (!${5:rst_n}) begin
+		$2 <= ${6:'0};
+	end else if (${1}) begin
+		${2:${VISUAL}} <= ${3};
+	end
+end
+$0
+endsnippet
+
+# Load-enable Flip-Flop without reset
+snippet fflnr "Load-enable Flip-Flop without reset" b
+always_ff @(posedge ${4:clk}) begin
+	if (${1}) begin
+		${2:${VISUAL}} <= ${3};
+	end
+end
+$0
+endsnippet
+
+###############
+# Declaration #
+###############
+
+snippet types "Typedef structure" b
+typedef struct packed {
+	${2:${VISUAL}}
+} ${1:`!v vim_snippets#Filename('$1','PackageName')`_t};
+$0
+endsnippet
+
+#########################
+# package and interface #
+#########################
+
+snippet pkg "Declare package" b
+package ${1:`!v vim_snippets#Filename('$1','PackageName')`};
+	$2
+endpackage  // $1
+$0
+endsnippet
+
+snippet intf "Declare interface" b
+interface ${1:`!v vim_snippets#Filename('$1','InterfaceName')`} ();
+
+	// nets
+	$2
+
+	// clocking
+	$3
+
+	// modports
+	$4
+
+endinterface  // $1
+$0
+endsnippet
+
+# vim:ft=snippets:

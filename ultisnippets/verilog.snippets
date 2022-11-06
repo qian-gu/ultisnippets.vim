@@ -1,0 +1,113 @@
+priority -50
+
+#############
+# statement #
+#############
+
+snippet if "if statement" b
+if (${1}) begin
+	${2}
+end
+$0
+endsnippet
+
+snippet else "else statement" b
+else begin
+	${1}
+end
+$0
+endsnippet
+
+snippet ifelse "if-else statement" b
+if (${1}) begin
+	${2}
+end else begin
+	${3}
+end
+$0
+endsnippet
+
+snippet case "case statement" b
+case (${1:expr})
+	${2:VALUE_1}: ${3:expr};
+	${4:VALUE_2}: ${5:expr};
+	${6:VALUE_3}: ${7:expr};
+	${8:VALUE_4}: ${9:expr};
+	default: ${10:expr};
+endcase
+$0
+endsnippet
+
+snippet for "For loop statement" b
+for (int ${1:i} = 0; $1 < ${2:MAX}; $1++) begin : ${3:loop_label}
+	${4:${VISUAL}}
+end  // $3
+$0
+endsnippet
+
+snippet generate-for "generate for loop" b
+for (genvar ${1:i} = 0; $1 < ${2:max}; $1++) begin : ${3:loop_label}
+	${4:${VISUAL}}
+end  // $3
+$0
+endsnippet
+
+snippet generate-if "generate if condition" b
+if (${1:PARAMETER_VALUE} == ${2:CONDIATION}) begin : ${3:if_label}
+	${4}
+end  // $3
+else begin : ${5:else_label}
+	${6}
+end  // $5
+$0
+endsnippet
+
+#######################
+# combinational logic #
+#######################
+
+snippet al "Infer combinational from always" b
+always @(*) begin
+	${1:${VISUAL}}
+end
+$0
+endsnippet
+
+snippet assign "Infer combinational logic from assign" b
+assign ${1:${VISUAL}} = ${2};
+$0
+endsnippet
+
+###############
+# Declaration #
+###############
+
+snippet fun "Declare function" b
+function ${1:ret_type} ${2:`!v vim_snippets#Filename('$1','FunctionName')`}(
+	// arguments list
+	${3}
+);
+
+	// variable
+	$1 $2;
+
+	// body
+	${4}
+
+	return $2;
+endfunction  // $2
+$0
+endsnippet
+
+snippet mod "Declare module" b
+module ${1:`!v vim_snippets#Filename('$1','ModuleName')`} (
+	// port list
+	${2}
+);
+	// module body
+	${3}
+endmodule  // $1
+$0
+endsnippet
+
+# vim:ft=snippets:
