@@ -1,6 +1,6 @@
-# vim-ultisnippets
+# ultisnippets.vim
 
-A Collection of custom snippets for ultisnips
+A collection of custom snippets for ultisnips with vim.
 
 **snippets list:**
 
