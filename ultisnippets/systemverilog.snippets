@@ -9,21 +9,21 @@ priority -49
 # combinational logic #
 #######################
 
-snippet comb "Infer combinational from always_comb" b
+snippet comb "Infer combinational from always_comb" bA
 always_comb begin
 	${1:${VISUAL}}
 end
 $0
 endsnippet
 
-snippet alc "Infer combinational from always_comb" b
+snippet alc "Infer combinational from always_comb" bA
 always_comb begin
 	${1:${VISUAL}}
 end
 $0
 endsnippet
 
-snippet latch "Infer latch from always" b
+snippet latch "Infer latch from always" bA
 always_latch begin
 	${1:${VISUAL}}
 end
@@ -46,7 +46,7 @@ endsnippet
 # `FFLNR:   load-enable without reset
 
 # Flip-Flop with asynchronous reset
-snippet ffar "Flip-Flop with asynchronous reset" b
+snippet ffar "Flip-Flop with asynchronous reset" bA
 always_ff @(posedge ${3:clk} or negedge ${4:rst_n}) begin
 	if (!$4) begin
 		$1 <= ${5:'0};
@@ -58,7 +58,7 @@ $0
 endsnippet
 
 # Flip-Flop with synchronous reset
-snippet ffsr "Flip-Flop with asynchronous active-high reset" b
+snippet ffsr "Flip-Flop with asynchronous active-high reset" bA
 always_ff @(posedge ${3:clk}) begin
 	if (!${4:rst_n}) begin
 		$1 <= ${5:'0};
@@ -70,7 +70,7 @@ $0
 endsnippet
 
 # Always-enable Flip-Flop without reset
-snippet ffnr "Always-enable Flip-Flop without reset" b
+snippet ffnr "Always-enable Flip-Flop without reset" bA
 always_ff @(posedge ${3:clk}) begin
 		${1:${VISUAL}} <= ${2};
 end
@@ -78,7 +78,7 @@ $0
 endsnippet
 
 # Flip-Flop with load-enable and asynchronous active-low reset
-snippet fflar "Flip-Flop with load-enable and asynchronous reset" b
+snippet fflar "Flip-Flop with load-enable and asynchronous reset" bA
 always_ff @(posedge ${4:clk} or negedge ${5:rst_n}) begin
 	if (!$5) begin
 		$2 <= ${6:'0};
@@ -90,7 +90,7 @@ $0
 endsnippet
 
 # Flip-Flop with load-enable and asynchronous active-low reset
-snippet alff "Flip-Flop with load-enable and asynchronous reset, fast version" b
+snippet alff "Flip-Flop with load-enable and asynchronous reset, fast version" bA
 always_ff @(posedge clk or negedge rst_n) begin
 	if (!rst_n) begin
 		$2 <= ${4:'0};
@@ -102,7 +102,7 @@ $0
 endsnippet
 
 # Flip-Flop with load-enable and synchronous active-low reset
-snippet fflsr "Flip-Flop with load-enable and synchronous reset" b
+snippet fflsr "Flip-Flop with load-enable and synchronous reset" bA
 always_ff @(posedge ${4:clk}) begin
 	if (!${5:rst_n}) begin
 		$2 <= ${6:'0};
@@ -114,7 +114,7 @@ $0
 endsnippet
 
 # Load-enable Flip-Flop without reset
-snippet fflnr "Load-enable Flip-Flop without reset" b
+snippet fflnr "Load-enable Flip-Flop without reset" bA
 always_ff @(posedge ${4:clk}) begin
 	if (${1}) begin
 		${2:${VISUAL}} <= ${3};
@@ -127,7 +127,7 @@ endsnippet
 # Declaration #
 ###############
 
-snippet types "Typedef structure" b
+snippet types "Typedef structure" bA
 typedef struct packed {
 	${2:${VISUAL}}
 } ${1:`!v vim_snippets#Filename('$1','PackageName')`_t};
@@ -138,14 +138,14 @@ endsnippet
 # package and interface #
 #########################
 
-snippet pkg "Declare package" b
+snippet pkg "Declare package" bA
 package ${1:`!v vim_snippets#Filename('$1','PackageName')`};
 	$2
 endpackage  // $1
 $0
 endsnippet
 
-snippet intf "Declare interface" b
+snippet intf "Declare interface" bA
 interface ${1:`!v vim_snippets#Filename('$1','InterfaceName')`} ();
 
 	// nets
