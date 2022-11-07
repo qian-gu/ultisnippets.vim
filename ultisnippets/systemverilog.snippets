@@ -16,6 +16,13 @@ end
 $0
 endsnippet
 
+snippet alc "Infer combinational from always_comb" b
+always_comb begin
+	${1:${VISUAL}}
+end
+$0
+endsnippet
+
 snippet latch "Infer latch from always" b
 always_latch begin
 	${1:${VISUAL}}
@@ -75,6 +82,18 @@ snippet fflar "Flip-Flop with load-enable and asynchronous reset" b
 always_ff @(posedge ${4:clk} or negedge ${5:rst_n}) begin
 	if (!$5) begin
 		$2 <= ${6:'0};
+	end else if (${1}) begin
+		${2:${VISUAL}} <= ${3};
+	end
+end
+$0
+endsnippet
+
+# Flip-Flop with load-enable and asynchronous active-low reset
+snippet alff "Flip-Flop with load-enable and asynchronous reset, fast version" b
+always_ff @(posedge clk or negedge rst_n) begin
+	if (!rst_n) begin
+		$2 <= ${4:'0};
 	end else if (${1}) begin
 		${2:${VISUAL}} <= ${3};
 	end
