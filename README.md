@@ -12,7 +12,7 @@ A collection of custom snippets for ultisnips with vim.
 
 Assume using `Vundle` to install,
 
-1. add `Plugin 'qian-gu/vim-ultisnippets'` to .vimrc
+1. add `Plugin 'qian-gu/ultisnippets.vim'` to .vimrc
 2. run `vim +PluginInstall`
 
 ## Configuration
