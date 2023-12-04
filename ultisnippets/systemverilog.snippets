@@ -141,23 +141,23 @@ endsnippet
 snippet pkg "Declare package" bA
 package ${1:`!v vim_snippets#Filename('$1','PackageName')`};
 	$2
-endpackage  // $1
+endpackage : $1
 $0
 endsnippet
 
 snippet intf "Declare interface" bA
-interface ${1:`!v vim_snippets#Filename('$1','InterfaceName')`} ();
+interface ${1:`!v vim_snippets#Filename('$1','InterfaceName')`} ($2);
 
 	// nets
-	$2
-
-	// clocking
 	$3
 
-	// modports
+	// clocking
 	$4
 
-endinterface  // $1
+	// modports
+	$5
+
+endinterface : $1
 $0
 endsnippet
 
